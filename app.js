@@ -76,13 +76,11 @@ app.post('/list', (req, res) => {
     res.send(201);
 })
 //fail
-app.delete('/list', (req, res) => {
-    const { item } = req.params;
-    const deleted = list.find((d) => d.item === item);
-    if(deleted) {
-        list = list.filter(list => list.item !== item)
-    }
-    res.send(404);
+app.delete('/list/:item', (req, res) => {
+    const item  = +req.params;
+    const index = list.find((j) => j.item === item);
+    const deleteditem = list.splice(index, 1);
+    res.send(deleteditem);
 })
 
 
