@@ -44,7 +44,7 @@ app.get('/times', (req, res) => {
    
     res.status(201).format({
         'application/json': function() {
-            res.send({ result: getTZ});
+            res.send({ result: timezone + ":" + getTZ});
         },
     });
 });
@@ -93,7 +93,7 @@ app.get('/fruits', (req, res) => {
     res.status(200).format({
         'application/json': function() {
             res.send({ result: queryResults });
-        },
+        }
     });
 });
 
