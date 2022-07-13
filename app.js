@@ -2,63 +2,26 @@ const _ = require('lodash');
 const express = require('express');
 const req = require('express/lib/request');
 const res = require('express/lib/response');
-const moment = require('moment');
-const momentTZ = require('moment-timezone');
-const { default: timestamp } = require('time-stamp');
-const { result } = require('lodash');
+const { result, isEmpty } = require('lodash');
 const app = express();
-const port = 3000;
+const port = 80;
+const appRouter = require('./src/routes/app.route');
+
 
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.get('/currentdatetime', (req, res) => {
-    res.send({
-        result: moment().format('YYYY/MM/DD HH:mm:ss'),
-    });
-});
-
-//timestamp --- ok 
-app.get('/timestamp', (req, res) => {
-    const { timestamp } = req.query;
-    let time = moment.unix(timestamp).utc(8);
-    let timeNow = moment();
-    let duration = timeNow.diff(time,'days');
-    res.status(200).format({
-        'application/json': function() {
-            res.send({ 
-             result: duration +'days'});
-    }})
- })
-
-
-
-//diff timezone --- ok 
-app.get('/times', (req, res) => {
-    const { timezone } = req.query;
-    const getTZ = momentTZ().tz(timezone).format();
-   
-    res.status(201).format({
-        'application/json': function() {
-            res.send({ result: timezone + ":" + getTZ});
-        },
-    });
-});
-
-
- 
 //查詢水果 --- ok
 app.get('/fruits', (req, res) => {
     const { name, quantityMoreThan, quantityLessThan } = req.query;
     const fs = require('fs');
-    const file="./fruitList.json";
-    const result=JSON.parse(fs.readFileSync(file));
+    const file = "./fruitList.json";
+    const result = JSON.parse(fs.readFileSync(file));
     // 要交集後的結果 --- ok
     let queryResults;
+    if (isEmpty){
+        queryResults = result;
+    };
     if (name) {
         queryResults = result.filter(singleFruitInfo => singleFruitInfo.name === name);
     }
@@ -101,9 +64,9 @@ app.get('/fruits', (req, res) => {
 //列出所有水果 --- ok
 app.get('/fruits/getFruitsList', (req, res) => {
     const fs = require('fs');
-    const file="./fruitList.json";
-    const getFruitResult=JSON.parse(fs.readFileSync(file));
-    res.status(201).format({
+    const file = "./fruitList.json";
+    const getFruitResult = JSON.parse(fs.readFileSync(file));
+    res.status(200).format({
         'application/json': function() {
             res.send({ result: getFruitResult });
             console.log(getFruitResult);
