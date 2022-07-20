@@ -1,4 +1,3 @@
-const { isEmpty } = require('lodash');
 const fs = require('fs');
 const readFruitList="./fruitList.json";
 
@@ -6,9 +5,6 @@ function getResult(query){
     const { name, quantityMoreThan, quantityLessThan } = query;
     const getFruitListResult=JSON.parse(fs.readFileSync(readFruitList));
     let queryResults = getFruitListResult;
-    // if (isEmpty){
-    //     queryResults = getFruitListResult;
-    // }
     if (name) {
         queryResults = getFruitListResult.filter(singleFruitInfo => singleFruitInfo.name === name);
     }

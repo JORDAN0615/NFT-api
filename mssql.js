@@ -1,3 +1,4 @@
+var express = require('express');
 const sql = require("mssql")
 const config = {
   user: "sa",
@@ -34,25 +35,4 @@ async function getDB() {
 }
 getDB()
 
-//reallyStrongPwd123
-
-
-
-// const sql = require('mssql')
-// const db =
-//     {
-//         "user": "sa",
-//         "password": "reallyStrongPwd123",
-//         "server": "localhost",
-//         "database": "fruit"
-//     };
-
-// sql.connect(db, function (err) {
-//     sql.close();
-// });
-
-// var request = new sql.Request();
-// request.query("select * from fruitlists", function (err, result) {
-//     console.log( result );
-// });
-
+//pwd ------- reallyStrongPwd123

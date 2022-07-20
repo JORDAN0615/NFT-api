@@ -2,12 +2,12 @@
 	{
 		"id": 1,
 		"name": "apple",
-		"quantity": 10
+		"quantity": 16
 	},
 	{
 		"id": 2,
-		"name": "banana",
-		"quantity": 30
+		"name": "orange",
+		"quantity": 20
 	},
 	{
 		"id": 3,
@@ -16,12 +16,12 @@
 	},
 	{
 		"id": 4,
-		"name": "orange",
-		"quantity": 30
+		"name": "lemon",
+		"quantity": 2
 	},
 	{
 		"id": 5,
-		"name": "tomato",
-		"quantity": 15
+		"name": "kiwi",
+		"quantity": 16
 	}
 ]
