@@ -78,7 +78,6 @@ async function deleteFruit(fruitId) {
 
 module.exports = {
   getFruitListResult: getFruitListResult,
-  getFruitListResultFromId: getFruitListResultFromId,
   addFruitItem: addFruitItem,
   deleteFruit: deleteFruit
 };
