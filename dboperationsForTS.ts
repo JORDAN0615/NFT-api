@@ -31,22 +31,19 @@ type furitTypeForFindUnique = {
   quantity: number;
 };
 
-export type fruitlistFindUniqueArgs = {
-  where: fruitlistWhereUniqueInput
-}
-
 async function getFruitListResult(query: queryOption) {
   let fruitResult = await prisma.fruitlist.findMany()
   const { name, quantityMoreThan, quantityLessThan, id } = query;
-  // if (name) {
-  //   const name = query.name;
-  //   let fruitResult = await prisma.fruitlist.findUnique({
-  //     where: {
-  //       name: String(name),
-  //     },
-  //   })
-  // return fruitResult;
-  // }
+
+  if (name) {
+    const name = query.name;
+    let fruitResult = await prisma.fruitlist.findUnique({
+     where: {
+       name: String(name),
+     },
+    })
+  return fruitResult;
+  }
 //query(id) function works
   if (id) {
     const id = query.id;
@@ -61,11 +58,11 @@ async function getFruitListResult(query: queryOption) {
   if (quantityLessThan) {
     const quantityLessThan = query.quantityLessThan
     let fruitResult = await prisma.fruitlist.findMany({
-      where: {
-        likes: {
-          lte: quantityLessThan,
-        } 
-      },
+    where: {
+      quantity:{
+        lte: Number(quantityLessThan)
+      }
+    }
     })
     return fruitResult;
   }
@@ -73,15 +70,15 @@ async function getFruitListResult(query: queryOption) {
     const quantityMoreThan = query.quantityMoreThan
     let fruitResult = await prisma.fruitlist.findMany({
       where: {
-        likes: {
-          gt: quantityMoreThan,
-        } 
-      },
+        quantity:{
+          gte: Number(quantityMoreThan)
+        }
+      }
     })
     return fruitResult
   }
-  return fruitResult;
-}
+   return fruitResult;
+ }
 
 // async function getFruitListResult(query: queryOption) {
 //   const { name, quantityMoreThan, quantityLessThan, id } = query;
