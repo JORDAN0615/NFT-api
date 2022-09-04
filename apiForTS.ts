@@ -14,7 +14,6 @@ router.use((req, res, next) => {
   console.log("middleware");
   next();
 });
-
 interface req {
   query: {
     name: string;
@@ -27,21 +26,12 @@ interface req {
 router.route("/fruitlists").get((req: req, res) => {
     getFruitListResult(req.query)
     .then((result: any) => {
-      // console.log("connection sucessed ")
-      console.log(result);
       res.json(result);
     })
     .catch((error: any) => {
       console.log(error);
     });
 });
-
-// router.route("/fruitlists/:id").get((req, res) => {
-//   getFruitListResultFromId(req.params.id).then(result => {
-//     res.json(result);
-//     console.log(result);
-//   });
-// });
 
 router.route("/fruitlists").post((req, res) => {
   addFruitItem(req.body).then(() => {

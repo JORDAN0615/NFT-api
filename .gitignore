@@ -4,3 +4,5 @@ testCode
 dbconfig_mysql.js
 testConnect*
 dbconfig*
+.env*
+tscBuild
